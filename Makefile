@@ -6,6 +6,8 @@ run-all: run-user run-balance run-transfer
 
 test-all: test-user test-balance test-transfer
 
+tidy-all: tidy-user tidy-balance tidy-transfer
+
 build-user:
 	cd services/user && go build -o ../../bin/user ./cmd
 
@@ -32,6 +34,15 @@ run-transfer:
 
 test-transfer:
 	cd services/transfer && go test ./...
+
+tidy-transfer:
+	cd services/transfer && go mod tidy
+
+tidy-balance:
+	cd services/balance && go mod tidy
+
+tidy-user:
+	cd services/user && go mod tidy
 
 docker-build-user:
 	docker build --build-arg SERVICE_NAME=user -t user-service .
