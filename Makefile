@@ -1,21 +1,12 @@
 .PHONY: build-all run-all test-all
 
-build-all: build-user build-balance build-transfer
+build-all: build-balance build-transfer
 
-run-all: run-user run-balance run-transfer
+run-all: run-balance run-transfer
 
-test-all: test-user test-balance test-transfer
+test-all: test-balance test-transfer
 
-tidy-all: tidy-user tidy-balance tidy-transfer
-
-build-user:
-	cd services/user && go build -o ../../bin/user ./cmd
-
-run-user:
-	cd services/user && go run ./cmd
-
-test-user:
-	cd services/user && go test ./...
+tidy-all: tidy-balance tidy-transfer
 
 build-balance:
 	cd services/balance && go build -o ../../bin/balance ./cmd
@@ -40,12 +31,6 @@ tidy-transfer:
 
 tidy-balance:
 	cd services/balance && go mod tidy
-
-tidy-user:
-	cd services/user && go mod tidy
-
-docker-build-user:
-	docker build --build-arg SERVICE_NAME=user -t user-service .
 
 docker-build-balance:
 	docker build --build-arg SERVICE_NAME=balance -t balance-service .
